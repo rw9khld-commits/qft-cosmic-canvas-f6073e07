@@ -1,170 +1,203 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { QFTSidebar } from "@/components/QFTSidebar";
-import { StarField } from "@/components/StarField";
-import heroImg from "@/assets/qft-hero.jpg";
-import { ArrowRight, Atom, Waves, FlaskConical, Brain, Map, Sparkles, Infinity as InfIcon, Eye } from "lucide-react";
+import { QuantumCanvas } from "@/components/QuantumCanvas";
+import { FieldWaveCanvas } from "@/components/FieldWaveCanvas";
+import { RightRail } from "@/components/RightRail";
+import {
+  VizLagrangian, VizFeynman, VizPathIntegral, VizRenormalization, VizVacuum, VizSymmetries,
+} from "@/components/FeatureVisuals";
+import { ArrowRight, Eye, Camera, BookOpen, Cpu, Sigma, Settings, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "QFT Decoder — From Fields to Reality" },
-      { name: "description", content: "Explore Quantum Field Theory through cinematic visualizations and interactive simulations." },
+      { name: "description", content: "Cinematic exploration of Quantum Field Theory: fields, Lagrangians, Feynman diagrams, path integrals, and beyond." },
     ],
   }),
   component: Index,
 });
 
-const sections = [
-  { title: "Derivations", desc: "Lagrangians, gauge symmetries, and the equations behind reality.", icon: Atom, accent: "violet" },
-  { title: "Visual Explorer", desc: "See fields ripple, particles emerge, and forces unfold.", icon: Waves, accent: "cyan" },
-  { title: "Simulations", desc: "Run Feynman diagrams and path integrals in real time.", icon: FlaskConical, accent: "gold" },
-  { title: "Quizzes", desc: "Test your intuition across the standard model and beyond.", icon: Brain, accent: "violet" },
-  { title: "Roadmap", desc: "A curated path from classical fields to quantum gravity.", icon: Map, accent: "cyan" },
-  { title: "Beyond Standard Model", desc: "Dark matter, supersymmetry, strings — the open frontier.", icon: InfIcon, accent: "gold" },
+const features = [
+  { title: "Lagrangian", action: "Inspect", Viz: VizLagrangian, eq: "ℒ = ψ̄(iγᵘDᵤ − m)ψ" },
+  { title: "Feynman Diagram", action: "Build", Viz: VizFeynman },
+  { title: "Path Integral", action: "Visualize", Viz: VizPathIntegral },
+  { title: "Renormalization", action: "Run", Viz: VizRenormalization },
+  { title: "Vacuum", action: "Explore", Viz: VizVacuum },
+  { title: "Symmetries", action: "Analyze", Viz: VizSymmetries },
 ];
 
 function Index() {
   return (
     <div className="relative min-h-screen flex text-foreground">
-      <StarField />
+      <QuantumCanvas />
       <QFTSidebar />
 
       <main className="relative z-10 flex-1 min-w-0">
-        <section className="relative min-h-screen overflow-hidden">
-          <img
-            src={heroImg}
-            alt="Quantum vacuum field"
-            width={1920}
-            height={1088}
-            className="absolute inset-0 w-full h-full object-cover opacity-70"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/40" />
-
-          <div className="relative z-10 px-6 lg:px-16 pt-20 pb-32 max-w-7xl">
-            <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 mb-8">
-              <Sparkles className="w-3.5 h-3.5 text-gold" />
-              <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">A Cinematic Journey into Reality</span>
-            </div>
-
-            <h1 className="font-display font-light leading-[0.95] tracking-tight text-6xl md:text-8xl lg:text-9xl">
-              <span className="block text-glow-gold text-gold/95">QFT</span>
-              <span className="block text-glow-violet bg-gradient-to-r from-foreground via-violet to-cyan bg-clip-text text-transparent">
-                Decoder
-              </span>
-            </h1>
-
-            <p className="font-display italic text-2xl md:text-3xl mt-8 text-muted-foreground max-w-2xl">
-              From Fields to Reality.
-            </p>
-            <p className="mt-6 text-base md:text-lg text-muted-foreground/80 max-w-xl leading-relaxed">
-              Every particle is a ripple. Every force, a symmetry. Decode the language the universe writes itself in.
-            </p>
-
-            <div className="mt-12 flex flex-wrap gap-4">
-              <button className="group relative inline-flex items-center gap-3 px-7 py-4 rounded-full bg-gradient-to-r from-violet to-violet/80 text-white font-medium shadow-glow-violet hover:scale-[1.02] transition-transform">
-                <span>Begin Exploration</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="inline-flex items-center gap-3 px-7 py-4 rounded-full glass hover:border-cyan/50 transition-colors">
-                <Eye className="w-4 h-4 text-cyan" />
-                <span className="font-medium">Watch Trailer</span>
-              </button>
-            </div>
-
-            <div className="hidden md:grid grid-cols-3 gap-4 mt-20 max-w-2xl">
-              {[
-                { k: "10⁻³⁵", v: "Planck Scale (m)" },
-                { k: "17", v: "Fundamental Fields" },
-                { k: "∞", v: "Vacuum Fluctuations" },
-              ].map((s, i) => (
-                <div key={s.v} className="glass rounded-2xl p-5 animate-float" style={{ animationDelay: `${i * 0.4}s` }}>
-                  <div className="font-display text-3xl text-gold text-glow-gold">{s.k}</div>
-                  <div className="text-xs text-muted-foreground mt-1 tracking-wider uppercase">{s.v}</div>
-                </div>
+        {/* Top bar */}
+        <div className="flex items-center justify-between gap-4 px-6 lg:px-10 py-5 border-b border-violet/10">
+          <div className="text-[13px] leading-snug text-muted-foreground">
+            <div>You are exploring the language of the universe.</div>
+            <div className="text-foreground/70">Reality is a field. Particles are its poetry.</div>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="glass rounded-full flex items-center p-1 gap-1">
+              {[Eye, Camera, BookOpen].map((Ic, i) => (
+                <button key={i} className="w-9 h-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-violet/10 transition">
+                  <Ic className="w-4 h-4" />
+                </button>
               ))}
             </div>
+            <button className="glass-strong rounded-full px-4 h-10 flex items-center gap-2 text-sm border-violet/50 text-violet shadow-glow-violet">
+              <Cpu className="w-4 h-4" />
+              Visual Engine
+            </button>
+            <button className="glass rounded-full px-4 h-10 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition">
+              <Sigma className="w-4 h-4" />
+              Math Mode
+            </button>
+            <button className="glass rounded-full w-10 h-10 flex items-center justify-center text-muted-foreground">
+              <Settings className="w-4 h-4" />
+            </button>
           </div>
+        </div>
 
-          <div className="hidden xl:block absolute right-12 top-1/2 -translate-y-1/2 w-80 glass-strong rounded-2xl p-6 z-10">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs tracking-widest uppercase text-muted-foreground">Active Field</span>
-              <span className="w-2 h-2 rounded-full bg-cyan shadow-glow-cyan animate-shimmer" />
-            </div>
-            <h3 className="font-display text-2xl mb-4">Electron Field</h3>
-            <div className="aspect-square rounded-xl bg-gradient-to-br from-violet/30 to-cyan/20 relative overflow-hidden mb-5 border border-violet/30">
-              <div className="absolute inset-0 starfield opacity-50" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-24 h-24 rounded-full bg-violet/40 blur-2xl animate-pulse-glow" />
-                <div className="absolute w-3 h-3 rounded-full bg-white shadow-glow-violet" />
+        <div className="flex">
+          <div className="flex-1 min-w-0 px-6 lg:px-10 py-8 space-y-8">
+            {/* HERO */}
+            <section className="relative rounded-3xl overflow-hidden glass-strong h-[560px]">
+              <FieldWaveCanvas />
+              <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/30" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/60" />
+
+              <div className="relative z-10 p-10 lg:p-14 max-w-2xl">
+                <h1 className="font-display font-light leading-[0.95] tracking-tight">
+                  <span className="block text-5xl md:text-6xl lg:text-7xl text-gold text-glow-gold">Reality is</span>
+                  <span className="block text-5xl md:text-6xl lg:text-7xl mt-1 bg-gradient-to-br from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent">
+                    an Interacting Field.
+                  </span>
+                </h1>
+                <p className="mt-8 font-display italic text-2xl text-violet text-glow-violet">
+                  Explore. Interact. Understand.
+                </p>
+                <div className="mt-10">
+                  <button className="group relative inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full glass-strong border-violet/40 hover:border-violet transition-all shadow-glow-violet">
+                    <span className="font-medium tracking-wide">Start Exploration</span>
+                    <span className="w-9 h-9 rounded-full bg-gradient-to-br from-violet to-cyan flex items-center justify-center shadow-glow-violet group-hover:scale-105 transition-transform">
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </span>
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="space-y-2 text-sm">
-              {[["Spin", "1/2"], ["Charge", "-e"], ["Mass", "0.511 MeV"], ["Type", "Fermion"]].map(([k, v]) => (
-                <div key={k} className="flex justify-between border-b border-violet/10 pb-1.5">
-                  <span className="text-muted-foreground">{k}</span>
-                  <span className="text-foreground">{v}</span>
+
+              {/* Active Field panel */}
+              <div className="hidden md:flex absolute right-6 top-6 bottom-6 w-[300px] flex-col z-10 glass-strong rounded-2xl p-5">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground">Active Field</span>
+                  <span className="w-2 h-2 rounded-full bg-cyan shadow-glow-cyan animate-shimmer" />
                 </div>
+                <h3 className="font-display text-2xl mb-3">Electron Field</h3>
+                <div className="relative aspect-square rounded-xl bg-gradient-to-br from-violet/30 via-background/40 to-cyan/20 overflow-hidden mb-4 border border-violet/30">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute w-28 h-28 rounded-full bg-violet/40 blur-2xl animate-pulse-glow" />
+                    <svg viewBox="0 0 120 120" className="absolute inset-0 w-full h-full">
+                      {Array.from({ length: 24 }).map((_, i) => {
+                        const a = (i / 24) * Math.PI * 2;
+                        return <line key={i} x1="60" y1="60" x2={60 + Math.cos(a) * 50} y2={60 + Math.sin(a) * 50} stroke="hsl(270 90% 70% / 0.25)" strokeWidth="0.5" />;
+                      })}
+                      <circle cx="60" cy="60" r="44" stroke="hsl(270 90% 70% / 0.3)" fill="none" />
+                      <circle cx="60" cy="60" r="28" stroke="hsl(195 90% 70% / 0.4)" fill="none" />
+                    </svg>
+                    <div className="relative w-3 h-3 rounded-full bg-white shadow-glow-violet" />
+                  </div>
+                </div>
+                <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">Field Properties</div>
+                <div className="space-y-1.5 text-sm">
+                  {[["Spin", "1/2"], ["Charge", "-e"], ["Mass", "0.511 MeV"], ["Type", "Fermion"]].map(([k, v]) => (
+                    <div key={k} className="flex justify-between border-b border-violet/10 pb-1.5">
+                      <span className="text-muted-foreground">{k}</span>
+                      <span className="text-foreground">{v}</span>
+                    </div>
+                  ))}
+                </div>
+                <button className="mt-4 inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-full glass border-violet/40 text-sm hover:border-violet hover:shadow-glow-violet transition-all">
+                  <span>Visualize Field</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-violet" />
+                </button>
+              </div>
+            </section>
+
+            {/* Feature cards */}
+            <section className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+              {features.map((f) => (
+                <article key={f.title} className="group glass rounded-2xl p-4 hover:border-violet/50 hover:-translate-y-1 transition-all duration-500 relative overflow-hidden">
+                  <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-violet/30 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="flex items-center justify-between mb-3 relative">
+                    <h3 className="font-display text-lg">{f.title}</h3>
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan shadow-glow-cyan" />
+                  </div>
+                  {f.eq && <div className="text-[10px] text-cyan/80 mb-1 font-mono">{f.eq}</div>}
+                  <div className="aspect-[5/3] rounded-xl overflow-hidden glass mb-3">
+                    <f.Viz />
+                  </div>
+                  <button className="w-full glass rounded-lg py-1.5 text-xs tracking-wider uppercase text-muted-foreground hover:text-foreground hover:border-violet/40 transition">
+                    {f.action}
+                  </button>
+                </article>
               ))}
-            </div>
-          </div>
-        </section>
+            </section>
 
-        <section className="relative px-6 lg:px-16 py-24 max-w-7xl">
-          <div className="mb-14">
-            <div className="text-xs tracking-[0.3em] uppercase text-cyan mb-3">The Decoder</div>
-            <h2 className="font-display text-5xl md:text-6xl font-light max-w-3xl leading-tight">
-              Six pathways through the <span className="italic text-violet text-glow-violet">quantum substrate</span>.
-            </h2>
-          </div>
+            {/* Beyond The Standard Model */}
+            <section className="relative glass-strong rounded-3xl p-8 md:p-12 overflow-hidden">
+              <div className="absolute inset-0 opacity-30">
+                <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-violet via-gold to-cyan blur-[120px] animate-pulse-glow" />
+              </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {sections.map((s) => (
-              <article
-                key={s.title}
-                className="group glass rounded-2xl p-7 hover:border-violet/50 transition-all duration-500 hover:-translate-y-1 cursor-pointer relative overflow-hidden"
-              >
-                <div className="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-violet/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="relative">
-                  <div className={`w-12 h-12 rounded-xl glass-strong flex items-center justify-center mb-5 text-${s.accent}`}>
-                    <s.icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-display text-2xl mb-2">{s.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">{s.desc}</p>
-                  <div className="flex items-center gap-2 text-sm text-violet group-hover:gap-3 transition-all">
-                    <span>Explore</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
+              <div className="relative grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <h2 className="font-display text-4xl md:text-5xl font-light leading-tight mb-4">
+                    Beyond The <span className="italic text-gold text-glow-gold">Standard Model</span>
+                  </h2>
+                  <p className="text-muted-foreground text-base mb-8 leading-relaxed">
+                    Infinity is not the end. It is the beginning of our questions.
+                  </p>
+                  <button className="inline-flex items-center gap-3 px-6 py-3 rounded-full glass border-gold/40 hover:border-gold transition-all group">
+                    <span className="font-medium">Enter the Unknown</span>
+                    <ArrowRight className="w-4 h-4 text-gold group-hover:translate-x-1 transition-transform" />
+                  </button>
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
+                <div className="relative h-48">
+                  <svg viewBox="0 0 400 200" className="w-full h-full">
+                    <defs>
+                      <radialGradient id="bsm-core" cx="35%" cy="50%" r="40%">
+                        <stop offset="0%" stopColor="hsl(45 100% 75%)" />
+                        <stop offset="50%" stopColor="hsl(280 90% 50% / 0.4)" />
+                        <stop offset="100%" stopColor="transparent" />
+                      </radialGradient>
+                    </defs>
+                    <ellipse cx="140" cy="100" rx="120" ry="60" fill="url(#bsm-core)" />
+                    {[15, 30, 45, 60].map((r, i) => (
+                      <ellipse key={i} cx="140" cy="100" rx={r * 2.5} ry={r * 0.7} stroke={`hsl(45 80% 70% / ${0.5 - i * 0.1})`} fill="none" transform={`rotate(${-12 + i * 2} 140 100)`} />
+                    ))}
+                    <circle cx="140" cy="100" r="3" fill="white" />
+                    {[["Dark Matter", 80], ["Quantum Gravity", 200], ["Vacuum Structure", 290], ["Hierarchy", 360]].map(([t, x], i) => (
+                      <g key={i}>
+                        <circle cx={x as number} cy="170" r="2" fill="hsl(195 90% 70%)" />
+                        <text x={x as number} y="190" textAnchor="middle" fill="hsl(0 0% 70%)" fontSize="9">{t}</text>
+                      </g>
+                    ))}
+                  </svg>
+                </div>
+              </div>
+            </section>
 
-        <section className="relative px-6 lg:px-16 pb-24 max-w-7xl">
-          <div className="relative glass-strong rounded-3xl p-10 md:p-16 overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-violet via-gold to-cyan blur-[120px] animate-pulse-glow" />
-            </div>
-            <div className="relative max-w-2xl">
-              <div className="text-xs tracking-[0.3em] uppercase text-gold mb-4">Beyond The Standard Model</div>
-              <h2 className="font-display text-4xl md:text-6xl font-light leading-tight mb-6">
-                Infinity is not the end. It is the <span className="italic text-glow-gold text-gold">beginning</span> of our questions.
-              </h2>
-              <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                Dark matter. Quantum gravity. Vacuum structure. The hierarchy problem. Step past the known into what physics is still learning to ask.
-              </p>
-              <button className="inline-flex items-center gap-3 px-7 py-4 rounded-full glass-strong border-gold/40 hover:border-gold transition-all group">
-                <span className="font-medium">Enter the Unknown</span>
-                <ArrowRight className="w-4 h-4 text-gold group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
+            <footer className="py-8 text-center text-[11px] text-muted-foreground tracking-[0.25em] uppercase">
+              <span className="inline-flex items-center gap-2"><Sparkles className="w-3 h-3 text-gold" />QFT Decoder · Decoding the language of the universe</span>
+            </footer>
           </div>
-        </section>
 
-        <footer className="px-6 lg:px-16 py-8 text-center text-xs text-muted-foreground tracking-widest uppercase border-t border-violet/10">
-          QFT Decoder · Decoding the language of the universe
-        </footer>
+          <RightRail />
+        </div>
       </main>
     </div>
   );

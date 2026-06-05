@@ -137,3 +137,10 @@
 .animate-pulse-glow { animation: pulse-glow 5s ease-in-out infinite; }
 .animate-drift { animation: drift 120s linear infinite; }
 .animate-shimmer { animation: shimmer 3s ease-in-out infinite; }
+@keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes orbit-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+.animate-orbit { animation: orbit 14s linear infinite; }
+.animate-orbit-reverse { animation: orbit-reverse 22s linear infinite; }
+
+@utility shadow-glow-gold { box-shadow: var(--glow-gold); }
+@utility text-glow-cyan { text-shadow: 0 0 24px oklch(0.78 0.16 210 / 0.6); }
