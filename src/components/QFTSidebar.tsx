@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { Atom, Sparkles, FlaskConical, Brain, Map, Compass, Waves, Infinity as InfIcon } from "lucide-react";
 
 const items = [
@@ -28,17 +27,16 @@ export function QFTSidebar() {
       </div>
 
       <nav className="flex flex-col gap-1">
-        {items.map((it) => (
-          <Link
+        {items.map((it, i) => (
+          <a
             key={it.url}
-            to={it.url}
-            className="group flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-muted-foreground hover:text-foreground transition-all relative overflow-hidden"
-            activeProps={{ className: "!text-foreground bg-violet/15 border border-violet/30 shadow-glow-violet" }}
+            href={it.url}
+            className={`group flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all relative overflow-hidden ${i === 0 ? "text-foreground bg-violet/15 border border-violet/30 shadow-glow-violet" : "text-muted-foreground hover:text-foreground"}`}
           >
             <span className="absolute inset-0 bg-gradient-to-r from-violet/0 via-violet/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <it.icon className="w-4 h-4 relative" />
             <span className="relative font-medium tracking-wide">{it.title}</span>
-          </Link>
+          </a>
         ))}
       </nav>
 
