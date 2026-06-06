@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { QFTSidebar } from "@/components/QFTSidebar";
 import { QuantumCanvas } from "@/components/QuantumCanvas";
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const features: { title: string; action: string; Viz: () => React.ReactElement; eq?: string; url: string }[] = [
+const features: { title: string; action: string; Viz: () => ReactElement; eq?: string; url: string }[] = [
   { title: "Lagrangian", action: "Inspect", Viz: VizLagrangian, eq: "ℒ = ψ̄(iγᵘDᵤ − m)ψ", url: "/lagrangian" },
   { title: "Feynman Diagram", action: "Build", Viz: VizFeynman, url: "/feynman" },
   { title: "Path Integral", action: "Visualize", Viz: VizPathIntegral, url: "/path-integral" },
