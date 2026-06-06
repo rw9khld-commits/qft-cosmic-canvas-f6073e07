@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const features: { title: string; action: string; Viz: () => JSX.Element; eq?: string; url: string }[] = [
+const features: { title: string; action: string; Viz: () => React.ReactElement; eq?: string; url: string }[] = [
   { title: "Lagrangian", action: "Inspect", Viz: VizLagrangian, eq: "ℒ = ψ̄(iγᵘDᵤ − m)ψ", url: "/lagrangian" },
   { title: "Feynman Diagram", action: "Build", Viz: VizFeynman, url: "/feynman" },
   { title: "Path Integral", action: "Visualize", Viz: VizPathIntegral, url: "/path-integral" },
