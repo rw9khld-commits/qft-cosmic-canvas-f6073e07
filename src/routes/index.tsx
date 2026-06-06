@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { ReactElement } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { QFTSidebar } from "@/components/QFTSidebar";
 import { QuantumCanvas } from "@/components/QuantumCanvas";
 import { FieldWaveCanvas } from "@/components/FieldWaveCanvas";
@@ -18,13 +19,13 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const features = [
-  { title: "Lagrangian", action: "Inspect", Viz: VizLagrangian, eq: "ℒ = ψ̄(iγᵘDᵤ − m)ψ" },
-  { title: "Feynman Diagram", action: "Build", Viz: VizFeynman },
-  { title: "Path Integral", action: "Visualize", Viz: VizPathIntegral },
-  { title: "Renormalization", action: "Run", Viz: VizRenormalization },
-  { title: "Vacuum", action: "Explore", Viz: VizVacuum },
-  { title: "Symmetries", action: "Analyze", Viz: VizSymmetries },
+const features: { title: string; action: string; Viz: () => ReactElement; eq?: string; url: string }[] = [
+  { title: "Lagrangian", action: "Inspect", Viz: VizLagrangian, eq: "ℒ = ψ̄(iγᵘDᵤ − m)ψ", url: "/lagrangian" },
+  { title: "Feynman Diagram", action: "Build", Viz: VizFeynman, url: "/feynman" },
+  { title: "Path Integral", action: "Visualize", Viz: VizPathIntegral, url: "/path-integral" },
+  { title: "Renormalization", action: "Run", Viz: VizRenormalization, url: "/renormalization" },
+  { title: "Vacuum", action: "Explore", Viz: VizVacuum, url: "/vacuum" },
+  { title: "Symmetries", action: "Analyze", Viz: VizSymmetries, url: "/symmetries" },
 ];
 
 function Index() {
@@ -130,20 +131,24 @@ function Index() {
             {/* Feature cards */}
             <section className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
               {features.map((f) => (
-                <article key={f.title} className="group glass rounded-2xl p-4 hover:border-violet/50 hover:-translate-y-1 transition-all duration-500 relative overflow-hidden">
-                  <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-violet/30 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <Link
+                  key={f.title}
+                  to={f.url}
+                  className="group glass rounded-2xl p-4 hover:border-violet/40 hover:-translate-y-1 transition-all duration-500 relative overflow-hidden block"
+                >
+                  <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-violet/15 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   <div className="flex items-center justify-between mb-3 relative">
                     <h3 className="font-display text-lg">{f.title}</h3>
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan shadow-glow-cyan" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan/70" />
                   </div>
-                  {f.eq && <div className="text-[10px] text-cyan/80 mb-1 font-mono">{f.eq}</div>}
+                  {f.eq && <div className="text-[10px] text-cyan/70 mb-1 font-mono">{f.eq}</div>}
                   <div className="aspect-[5/3] rounded-xl overflow-hidden glass mb-3">
                     <f.Viz />
                   </div>
-                  <button className="w-full glass rounded-lg py-1.5 text-xs tracking-wider uppercase text-muted-foreground hover:text-foreground hover:border-violet/40 transition">
+                  <div className="w-full glass rounded-lg py-1.5 text-xs tracking-wider uppercase text-muted-foreground text-center group-hover:text-foreground transition">
                     {f.action}
-                  </button>
-                </article>
+                  </div>
+                </Link>
               ))}
             </section>
 
@@ -161,10 +166,10 @@ function Index() {
                   <p className="text-muted-foreground text-base mb-8 leading-relaxed">
                     Infinity is not the end. It is the beginning of our questions.
                   </p>
-                  <button className="inline-flex items-center gap-3 px-6 py-3 rounded-full glass border-gold/40 hover:border-gold transition-all group">
+                  <Link to="/beyond" className="inline-flex items-center gap-3 px-6 py-3 rounded-full glass border-gold/30 hover:border-gold/60 transition-all group">
                     <span className="font-medium">Enter the Unknown</span>
                     <ArrowRight className="w-4 h-4 text-gold group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </Link>
                 </div>
                 <div className="relative h-48">
                   <svg viewBox="0 0 400 200" className="w-full h-full">

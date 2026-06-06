@@ -9,8 +9,62 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VacuumRouteImport } from './routes/vacuum'
+import { Route as SymmetriesRouteImport } from './routes/symmetries'
+import { Route as RenormalizationRouteImport } from './routes/renormalization'
+import { Route as PathIntegralRouteImport } from './routes/path-integral'
+import { Route as LagrangianRouteImport } from './routes/lagrangian'
+import { Route as FieldsRouteImport } from './routes/fields'
+import { Route as FeynmanRouteImport } from './routes/feynman'
+import { Route as BeyondRouteImport } from './routes/beyond'
+import { Route as AdvancedRouteImport } from './routes/advanced'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VacuumRoute = VacuumRouteImport.update({
+  id: '/vacuum',
+  path: '/vacuum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SymmetriesRoute = SymmetriesRouteImport.update({
+  id: '/symmetries',
+  path: '/symmetries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RenormalizationRoute = RenormalizationRouteImport.update({
+  id: '/renormalization',
+  path: '/renormalization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PathIntegralRoute = PathIntegralRouteImport.update({
+  id: '/path-integral',
+  path: '/path-integral',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LagrangianRoute = LagrangianRouteImport.update({
+  id: '/lagrangian',
+  path: '/lagrangian',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FieldsRoute = FieldsRouteImport.update({
+  id: '/fields',
+  path: '/fields',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeynmanRoute = FeynmanRouteImport.update({
+  id: '/feynman',
+  path: '/feynman',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeyondRoute = BeyondRouteImport.update({
+  id: '/beyond',
+  path: '/beyond',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdvancedRoute = AdvancedRouteImport.update({
+  id: '/advanced',
+  path: '/advanced',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +73,158 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/advanced': typeof AdvancedRoute
+  '/beyond': typeof BeyondRoute
+  '/feynman': typeof FeynmanRoute
+  '/fields': typeof FieldsRoute
+  '/lagrangian': typeof LagrangianRoute
+  '/path-integral': typeof PathIntegralRoute
+  '/renormalization': typeof RenormalizationRoute
+  '/symmetries': typeof SymmetriesRoute
+  '/vacuum': typeof VacuumRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/advanced': typeof AdvancedRoute
+  '/beyond': typeof BeyondRoute
+  '/feynman': typeof FeynmanRoute
+  '/fields': typeof FieldsRoute
+  '/lagrangian': typeof LagrangianRoute
+  '/path-integral': typeof PathIntegralRoute
+  '/renormalization': typeof RenormalizationRoute
+  '/symmetries': typeof SymmetriesRoute
+  '/vacuum': typeof VacuumRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/advanced': typeof AdvancedRoute
+  '/beyond': typeof BeyondRoute
+  '/feynman': typeof FeynmanRoute
+  '/fields': typeof FieldsRoute
+  '/lagrangian': typeof LagrangianRoute
+  '/path-integral': typeof PathIntegralRoute
+  '/renormalization': typeof RenormalizationRoute
+  '/symmetries': typeof SymmetriesRoute
+  '/vacuum': typeof VacuumRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/advanced'
+    | '/beyond'
+    | '/feynman'
+    | '/fields'
+    | '/lagrangian'
+    | '/path-integral'
+    | '/renormalization'
+    | '/symmetries'
+    | '/vacuum'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/advanced'
+    | '/beyond'
+    | '/feynman'
+    | '/fields'
+    | '/lagrangian'
+    | '/path-integral'
+    | '/renormalization'
+    | '/symmetries'
+    | '/vacuum'
+  id:
+    | '__root__'
+    | '/'
+    | '/advanced'
+    | '/beyond'
+    | '/feynman'
+    | '/fields'
+    | '/lagrangian'
+    | '/path-integral'
+    | '/renormalization'
+    | '/symmetries'
+    | '/vacuum'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdvancedRoute: typeof AdvancedRoute
+  BeyondRoute: typeof BeyondRoute
+  FeynmanRoute: typeof FeynmanRoute
+  FieldsRoute: typeof FieldsRoute
+  LagrangianRoute: typeof LagrangianRoute
+  PathIntegralRoute: typeof PathIntegralRoute
+  RenormalizationRoute: typeof RenormalizationRoute
+  SymmetriesRoute: typeof SymmetriesRoute
+  VacuumRoute: typeof VacuumRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vacuum': {
+      id: '/vacuum'
+      path: '/vacuum'
+      fullPath: '/vacuum'
+      preLoaderRoute: typeof VacuumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/symmetries': {
+      id: '/symmetries'
+      path: '/symmetries'
+      fullPath: '/symmetries'
+      preLoaderRoute: typeof SymmetriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/renormalization': {
+      id: '/renormalization'
+      path: '/renormalization'
+      fullPath: '/renormalization'
+      preLoaderRoute: typeof RenormalizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/path-integral': {
+      id: '/path-integral'
+      path: '/path-integral'
+      fullPath: '/path-integral'
+      preLoaderRoute: typeof PathIntegralRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lagrangian': {
+      id: '/lagrangian'
+      path: '/lagrangian'
+      fullPath: '/lagrangian'
+      preLoaderRoute: typeof LagrangianRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fields': {
+      id: '/fields'
+      path: '/fields'
+      fullPath: '/fields'
+      preLoaderRoute: typeof FieldsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feynman': {
+      id: '/feynman'
+      path: '/feynman'
+      fullPath: '/feynman'
+      preLoaderRoute: typeof FeynmanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beyond': {
+      id: '/beyond'
+      path: '/beyond'
+      fullPath: '/beyond'
+      preLoaderRoute: typeof BeyondRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/advanced': {
+      id: '/advanced'
+      path: '/advanced'
+      fullPath: '/advanced'
+      preLoaderRoute: typeof AdvancedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +237,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdvancedRoute: AdvancedRoute,
+  BeyondRoute: BeyondRoute,
+  FeynmanRoute: FeynmanRoute,
+  FieldsRoute: FieldsRoute,
+  LagrangianRoute: LagrangianRoute,
+  PathIntegralRoute: PathIntegralRoute,
+  RenormalizationRoute: RenormalizationRoute,
+  SymmetriesRoute: SymmetriesRoute,
+  VacuumRoute: VacuumRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
