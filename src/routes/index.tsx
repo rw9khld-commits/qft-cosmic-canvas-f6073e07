@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { QFTSidebar } from "@/components/QFTSidebar";
 import { QuantumCanvas } from "@/components/QuantumCanvas";
 import { FieldWaveCanvas } from "@/components/FieldWaveCanvas";
