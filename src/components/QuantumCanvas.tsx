@@ -35,7 +35,7 @@ export function QuantumCanvas() {
       hue: number; r: number; partner?: P;
     };
     const parts: P[] = [];
-    const MAX = 120;
+    const MAX = 70;
 
     const spawnPair = () => {
       const x = Math.random() * w;
@@ -51,19 +51,19 @@ export function QuantumCanvas() {
     };
 
     // pre-populate
-    for (let i = 0; i < 30; i++) spawnPair();
+    for (let i = 0; i < 18; i++) spawnPair();
 
     let t = 0;
     const render = () => {
       t += 0.008;
-      // trail fade
-      ctx.fillStyle = "rgba(5, 5, 10, 0.18)";
+      // deeper trail fade — keeps background quiet so content reads cleanly
+      ctx.fillStyle = "rgba(3, 3, 8, 0.28)";
       ctx.fillRect(0, 0, w, h);
 
       // faint quantum field grid (sinusoidal)
       ctx.save();
       ctx.globalCompositeOperation = "lighter";
-      ctx.strokeStyle = "rgba(124, 58, 237, 0.05)";
+      ctx.strokeStyle = "rgba(124, 58, 237, 0.035)";
       ctx.lineWidth = 1;
       const step = 60;
       for (let y = 0; y < h; y += step) {
@@ -85,9 +85,9 @@ export function QuantumCanvas() {
         p.x += p.vx;
         p.y += p.vy;
         const t0 = p.life / p.max;
-        const alpha = Math.sin(t0 * Math.PI); // fade in & out
-        const color = `hsla(${p.hue}, 90%, 65%, ${alpha * 0.9})`;
-        const glow = `hsla(${p.hue}, 95%, 70%, ${alpha * 0.25})`;
+        const alpha = Math.sin(t0 * Math.PI) * 0.55; // softer
+        const color = `hsla(${p.hue}, 90%, 68%, ${alpha * 0.8})`;
+        const glow = `hsla(${p.hue}, 95%, 72%, ${alpha * 0.18})`;
 
         // glow halo
         const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 10);
@@ -119,7 +119,7 @@ export function QuantumCanvas() {
       }
       ctx.restore();
 
-      if (parts.length < MAX && Math.random() < 0.5) spawnPair();
+      if (parts.length < MAX && Math.random() < 0.25) spawnPair();
       raf = requestAnimationFrame(render);
     };
     render();
@@ -135,7 +135,7 @@ export function QuantumCanvas() {
       ref={ref}
       aria-hidden
       className="pointer-events-none fixed inset-0 w-full h-full z-0"
-      style={{ mixBlendMode: "screen" }}
+      style={{ mixBlendMode: "screen", opacity: 0.7 }}
     />
   );
 }
