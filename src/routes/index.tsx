@@ -19,13 +19,13 @@ export const Route = createFileRoute("/")({
 });
 
 const features = [
-  { title: "Lagrangian", action: "Inspect", Viz: VizLagrangian, eq: "ℒ = ψ̄(iγᵘDᵤ − m)ψ" },
-  { title: "Feynman Diagram", action: "Build", Viz: VizFeynman },
-  { title: "Path Integral", action: "Visualize", Viz: VizPathIntegral },
-  { title: "Renormalization", action: "Run", Viz: VizRenormalization },
-  { title: "Vacuum", action: "Explore", Viz: VizVacuum },
-  { title: "Symmetries", action: "Analyze", Viz: VizSymmetries },
-];
+  { title: "Lagrangian", action: "Inspect", Viz: VizLagrangian, eq: "ℒ = ψ̄(iγᵘDᵤ − m)ψ", url: "/lagrangian" },
+  { title: "Feynman Diagram", action: "Build", Viz: VizFeynman, url: "/feynman" },
+  { title: "Path Integral", action: "Visualize", Viz: VizPathIntegral, url: "/path-integral" },
+  { title: "Renormalization", action: "Run", Viz: VizRenormalization, url: "/renormalization" },
+  { title: "Vacuum", action: "Explore", Viz: VizVacuum, url: "/vacuum" },
+  { title: "Symmetries", action: "Analyze", Viz: VizSymmetries, url: "/symmetries" },
+] as const;
 
 function Index() {
   return (
