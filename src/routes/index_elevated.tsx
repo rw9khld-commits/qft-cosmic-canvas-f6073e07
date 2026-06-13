@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { QFTSidebar } from "@/components/QFTSidebar";
 import { QuantumCanvas } from "@/components/QuantumCanvas";
-import { QuantumFieldHeroElevatedElevated } from "@/components/QuantumFieldHeroElevatedElevated";
+import { QuantumFieldHeroElevated } from "@/components/QuantumFieldHeroElevated";
 import { RightRail } from "@/components/RightRail";
 import { ActiveFieldCard } from "@/components/ActiveFieldCard";
 import { LearningJourney } from "@/components/LearningJourney";
@@ -65,7 +65,7 @@ function Index() {
           <div className="flex-1 min-w-0 px-4 sm:px-6 lg:px-10 py-6 md:py-8 space-y-12 md:space-y-20">
             {/* HERO SECTION */}
             <section className="relative rounded-3xl overflow-hidden glass-strong h-[80vh] min-h-[560px] md:h-[720px]">
-              <QuantumFieldHeroElevatedElevated />
+              <QuantumFieldHeroElevated />
               {/* Sophisticated layered veils for text readability */}
               <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-background/20 pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/85 pointer-events-none" />
