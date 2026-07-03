@@ -12,7 +12,7 @@ import {
 } from "@/components/FeatureVisuals";
 import { ArrowRight, Sparkles, Sigma, Cpu, Eye, BookOpen, MousePointer2, Zap, Compass } from "lucide-react";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/index_elevated")({
   head: () => ({
     meta: [
       { title: "QFT Cosmic Canvas — The Universe as a Living Field" },

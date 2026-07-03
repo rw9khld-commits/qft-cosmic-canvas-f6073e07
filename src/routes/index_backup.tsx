@@ -12,7 +12,7 @@ import {
 } from "@/components/FeatureVisuals";
 import { ArrowRight, Sparkles, Sigma, Cpu, Eye, BookOpen, MousePointer2 } from "lucide-react";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/index_backup")({
   head: () => ({
     meta: [
       { title: "QFT Decoder — From Fields to Reality" },
