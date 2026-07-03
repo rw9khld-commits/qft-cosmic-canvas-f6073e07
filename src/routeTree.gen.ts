@@ -14,6 +14,8 @@ import { Route as SymmetriesRouteImport } from './routes/symmetries'
 import { Route as RenormalizationRouteImport } from './routes/renormalization'
 import { Route as PathIntegralRouteImport } from './routes/path-integral'
 import { Route as LagrangianRouteImport } from './routes/lagrangian'
+import { Route as Index_elevatedRouteImport } from './routes/index_elevated'
+import { Route as Index_backupRouteImport } from './routes/index_backup'
 import { Route as FieldsRouteImport } from './routes/fields'
 import { Route as FeynmanRouteImport } from './routes/feynman'
 import { Route as BeyondRouteImport } from './routes/beyond'
@@ -43,6 +45,16 @@ const PathIntegralRoute = PathIntegralRouteImport.update({
 const LagrangianRoute = LagrangianRouteImport.update({
   id: '/lagrangian',
   path: '/lagrangian',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Index_elevatedRoute = Index_elevatedRouteImport.update({
+  id: '/index_elevated',
+  path: '/index_elevated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Index_backupRoute = Index_backupRouteImport.update({
+  id: '/index_backup',
+  path: '/index_backup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FieldsRoute = FieldsRouteImport.update({
@@ -77,6 +89,8 @@ export interface FileRoutesByFullPath {
   '/beyond': typeof BeyondRoute
   '/feynman': typeof FeynmanRoute
   '/fields': typeof FieldsRoute
+  '/index_backup': typeof Index_backupRoute
+  '/index_elevated': typeof Index_elevatedRoute
   '/lagrangian': typeof LagrangianRoute
   '/path-integral': typeof PathIntegralRoute
   '/renormalization': typeof RenormalizationRoute
@@ -89,6 +103,8 @@ export interface FileRoutesByTo {
   '/beyond': typeof BeyondRoute
   '/feynman': typeof FeynmanRoute
   '/fields': typeof FieldsRoute
+  '/index_backup': typeof Index_backupRoute
+  '/index_elevated': typeof Index_elevatedRoute
   '/lagrangian': typeof LagrangianRoute
   '/path-integral': typeof PathIntegralRoute
   '/renormalization': typeof RenormalizationRoute
@@ -102,6 +118,8 @@ export interface FileRoutesById {
   '/beyond': typeof BeyondRoute
   '/feynman': typeof FeynmanRoute
   '/fields': typeof FieldsRoute
+  '/index_backup': typeof Index_backupRoute
+  '/index_elevated': typeof Index_elevatedRoute
   '/lagrangian': typeof LagrangianRoute
   '/path-integral': typeof PathIntegralRoute
   '/renormalization': typeof RenormalizationRoute
@@ -116,6 +134,8 @@ export interface FileRouteTypes {
     | '/beyond'
     | '/feynman'
     | '/fields'
+    | '/index_backup'
+    | '/index_elevated'
     | '/lagrangian'
     | '/path-integral'
     | '/renormalization'
@@ -128,6 +148,8 @@ export interface FileRouteTypes {
     | '/beyond'
     | '/feynman'
     | '/fields'
+    | '/index_backup'
+    | '/index_elevated'
     | '/lagrangian'
     | '/path-integral'
     | '/renormalization'
@@ -140,6 +162,8 @@ export interface FileRouteTypes {
     | '/beyond'
     | '/feynman'
     | '/fields'
+    | '/index_backup'
+    | '/index_elevated'
     | '/lagrangian'
     | '/path-integral'
     | '/renormalization'
@@ -153,6 +177,8 @@ export interface RootRouteChildren {
   BeyondRoute: typeof BeyondRoute
   FeynmanRoute: typeof FeynmanRoute
   FieldsRoute: typeof FieldsRoute
+  Index_backupRoute: typeof Index_backupRoute
+  Index_elevatedRoute: typeof Index_elevatedRoute
   LagrangianRoute: typeof LagrangianRoute
   PathIntegralRoute: typeof PathIntegralRoute
   RenormalizationRoute: typeof RenormalizationRoute
@@ -195,6 +221,20 @@ declare module '@tanstack/react-router' {
       path: '/lagrangian'
       fullPath: '/lagrangian'
       preLoaderRoute: typeof LagrangianRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/index_elevated': {
+      id: '/index_elevated'
+      path: '/index_elevated'
+      fullPath: '/index_elevated'
+      preLoaderRoute: typeof Index_elevatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/index_backup': {
+      id: '/index_backup'
+      path: '/index_backup'
+      fullPath: '/index_backup'
+      preLoaderRoute: typeof Index_backupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fields': {
@@ -241,6 +281,8 @@ const rootRouteChildren: RootRouteChildren = {
   BeyondRoute: BeyondRoute,
   FeynmanRoute: FeynmanRoute,
   FieldsRoute: FieldsRoute,
+  Index_backupRoute: Index_backupRoute,
+  Index_elevatedRoute: Index_elevatedRoute,
   LagrangianRoute: LagrangianRoute,
   PathIntegralRoute: PathIntegralRoute,
   RenormalizationRoute: RenormalizationRoute,
