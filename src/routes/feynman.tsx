@@ -12,36 +12,51 @@ function Page() {
     <SectionShell
       eyebrow="Chapter IV · Interaction"
       title="Feynman Diagrams"
-      italic="A Visual Algebra of Reality"
-      description="Richard Feynman invented a way to draw the unseeable. Every line is a propagator, every vertex a coupling, and every diagram a complex number whose square is a probability of the universe."
+      italic="A Graphical Algebra"
+      description="A Feynman diagram is not a picture of a trajectory. It is a mnemonic for one term in a perturbative expansion of a correlation function — a rigorous graphical bookkeeping of Wick contractions with a definite mathematical translation."
     >
       <figure className="glass rounded-3xl overflow-hidden border border-violet/20">
         <img src={feynmanImg.url} alt="Feynman diagram — two electrons exchanging a virtual photon" className="w-full h-auto" loading="lazy" />
-        <figcaption className="px-6 py-3 text-xs tracking-[0.25em] uppercase text-muted-foreground border-t border-violet/10">Fig. IV · Møller scattering — two electrons exchange a virtual photon γ</figcaption>
+        <figcaption className="px-6 py-3 text-xs tracking-[0.25em] uppercase text-muted-foreground border-t border-violet/10">Fig. IV · Tree-level Møller scattering — t-channel photon exchange</figcaption>
       </figure>
 
-      <GlassCard title="The Vocabulary" eq="line = propagator · vertex = coupling · external leg = real particle">
-        <p>Straight lines with arrows carry fermions (matter) through spacetime; the arrow direction distinguishes particle from antiparticle. Wavy lines carry photons; curly lines carry gluons; dashed lines often carry scalars such as the Higgs. At each vertex, the QED coupling constant √α ≈ 0.085 quantifies the chance that history forks.</p>
+      <GlassCard title="Where Diagrams Come From" eq="⟨f | S | i⟩ = ⟨f | T exp(−i ∫ Hᵢ dt) | i⟩">
+        <p>Split the Hamiltonian H = H₀ + Hᵢ. In the interaction picture, the S-matrix is a time-ordered exponential of the interaction Hamiltonian. Expand:</p>
+        <p className="font-mono text-cyan/80 pl-3 border-l border-cyan/30">
+          S = 𝟙 + (−i)∫Hᵢ dt + ((−i)²/2!) T∫∫Hᵢ Hᵢ dt dt′ + …
+        </p>
+        <p>Each term is a product of field operators. Wick's theorem reduces the vacuum expectation value of a time-ordered product of fields to a sum of products of two-point functions (propagators). <strong>Each way of pairing operators into propagators is one Feynman diagram.</strong> Diagrams are literally a graphical index of Wick contractions — nothing more, nothing less.</p>
       </GlassCard>
 
-      <GlassCard title="Virtual Particles & the Off-Shell Realm" eq="E² ≠ p²c² + m²c⁴  (internal lines)">
-        <p>External legs satisfy the relativistic mass-shell condition. Internal lines do not: they are mathematical bookkeeping for the field configurations summed over in the path integral. Virtual particles can have any mass, can travel faster than light, can move backwards in time — they are not observed, only integrated over. Their reality is their measurable consequence.</p>
+      <GlassCard title="The Feynman Rules as a Dictionary">
+        <p>Given a Lagrangian, the rules are mechanical:</p>
+        <ul className="list-disc list-inside space-y-1 pl-2">
+          <li><strong>Internal line</strong> ↔ propagator, e.g. photon: −i η<sub>ᵤᵥ</sub> / (k² + iε);  scalar: i / (k² − m² + iε);  fermion: i(γ·k + m) / (k² − m² + iε).</li>
+          <li><strong>Vertex</strong> ↔ coupling read directly off ℒ<sub>int</sub>. QED gives −ieγ<sup>ᵘ</sup>.</li>
+          <li><strong>External line</strong> ↔ polarisation vector / spinor of the physical incoming or outgoing particle.</li>
+          <li><strong>Loop</strong> ↔ integration ∫ d⁴k / (2π)⁴ over the undetermined internal momentum.</li>
+          <li>Impose momentum conservation at every vertex; include symmetry factors and a minus sign for each closed fermion loop.</li>
+        </ul>
+        <p><strong>Every physical amplitude is an ordered polynomial in the coupling constant, with each monomial equal to a specific diagram.</strong></p>
       </GlassCard>
 
-      <GlassCard title="From Pictures to Predictions">
-        <p>Each topology translates, by the Feynman rules, into a definite mathematical expression: a product of propagators, vertex factors, and an integral over undetermined internal momenta. Sum every distinct topology that connects the chosen initial and final states; square the resulting amplitude; multiply by phase space — and out comes a cross-section measurable at the LHC to one part in ten thousand.</p>
+      <GlassCard title="On-Shell vs. Off-Shell" eq="external: k² = m²   ·   internal: k² arbitrary">
+        <p>External legs correspond to detectable particles and must satisfy E² = p² + m². Internal lines are integrated over all four-momenta and are <em>off-shell</em>: they do not obey the mass-shell condition and are not, individually, observable.</p>
+        <p><strong>A "virtual particle" is a propagator, not a particle.</strong> It is a Green's function of the free field equation — a mathematical response, not a physical entity that fleetingly exists.</p>
       </GlassCard>
 
-      <GlassCard title="Perturbation Theory & Loops">
-        <p>Each additional vertex contributes a factor of the coupling constant. Tree diagrams (no closed loops) give the leading classical-like answer; one-loop diagrams give the first quantum correction; higher loops give finer corrections still. The anomalous magnetic moment of the electron, computed to five loops, agrees with experiment to twelve decimal places — the most precise match between theory and observation in all of science.</p>
+      <GlassCard title="Coupling Expansion and the Loop Hierarchy" eq="𝓐 = 𝓐<sub>tree</sub> + α 𝓐<sub>1-loop</sub> + α² 𝓐<sub>2-loop</sub> + …">
+        <p>Each additional vertex costs a factor of the coupling (√α for a QED vertex). Each closed loop contributes an integral over an internal momentum and a further factor of α. When α ≪ 1 the series is a controlled expansion. In QED the coupling is ~1/137, and the electron anomalous magnetic moment agrees with experiment to twelve significant figures — the sharpest quantitative test of any physical theory.</p>
       </GlassCard>
 
-      <GlassCard title="Crossing Symmetry">
-        <p>A single diagram, read in different time directions, describes several distinct processes. e⁻ + e⁻ → e⁻ + e⁻ (Møller scattering), e⁻ + e⁺ → e⁻ + e⁺ (Bhabha scattering), and e⁻ + e⁺ → γ + γ (annihilation) are unified by the underlying analytic structure of the amplitude — a deep symmetry of spacetime itself.</p>
-      </GlassCard>
-
-      <GlassCard title="Philosophical Coda">
-        <p>A Feynman diagram is not a picture of what happens — it is a picture of one term in an infinite calculation of what could happen. <em className="text-gold/90">Nature does not draw diagrams; she sums them.</em></p>
+      <GlassCard title="Crossing Symmetry — One Diagram, Many Processes">
+        <p>The amplitude 𝓜(p₁, p₂ → p₃, p₄) is an analytic function of the Mandelstam invariants s = (p₁+p₂)², t = (p₁−p₃)², u = (p₁−p₄)². Analytically continuing an outgoing particle of momentum p to an incoming antiparticle of momentum −p relates:</p>
+        <ul className="list-disc list-inside space-y-1 pl-2">
+          <li>e⁻e⁻ → e⁻e⁻ (Møller, t-channel)</li>
+          <li>e⁻e⁺ → e⁻e⁺ (Bhabha, adds s-channel)</li>
+          <li>e⁻e⁺ → γγ (annihilation, u-channel)</li>
+        </ul>
+        <p><strong>These are not three physics problems; they are three real slices of one complex-analytic amplitude.</strong> Crossing symmetry is a rigorous consequence of Lorentz invariance and locality.</p>
       </GlassCard>
     </SectionShell>
   );

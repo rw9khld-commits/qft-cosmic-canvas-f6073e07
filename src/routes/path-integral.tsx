@@ -12,36 +12,59 @@ function Page() {
     <SectionShell
       eyebrow="Chapter V · Sum Over Histories"
       title="The Path Integral"
-      italic="Every History at Once"
-      description="To get from here to there, a quantum particle does not choose a single trajectory. It takes them all — weighted by a complex phase — and the universe quietly averages over every possible past."
+      italic="Formulation"
+      description="The path integral rewrites quantum mechanics as a weighted sum over classical histories. In QFT it becomes a functional integral over field configurations. It is not an alternative interpretation — it is a computational and conceptual reformulation with the same predictions as canonical quantisation, but exposing the geometry more clearly."
     >
       <figure className="glass rounded-3xl overflow-hidden border border-violet/20">
-        <img src={pathImg.url} alt="Path integral — the probability amplitude from A to B as a sum over all possible trajectories" className="w-full h-auto" loading="lazy" />
-        <figcaption className="px-6 py-3 text-xs tracking-[0.25em] uppercase text-muted-foreground border-t border-violet/10">Fig. V · Every trajectory from A to B contributes a complex amplitude</figcaption>
+        <img src={pathImg.url} alt="Path integral — amplitude as a sum over trajectories" className="w-full h-auto" loading="lazy" />
+        <figcaption className="px-6 py-3 text-xs tracking-[0.25em] uppercase text-muted-foreground border-t border-violet/10">Fig. V · Every trajectory from A to B contributes a phase e^(iS/ℏ)</figcaption>
       </figure>
 
-      <GlassCard title="Feynman's Formulation" eq="K(b,a) = ∫ 𝒟x(t)  exp( i S[x(t)] / ℏ )">
-        <p>The propagator K(b,a) — the amplitude for a particle to go from event a to event b — is a functional integral over every continuous path connecting them. Each path contributes a unit-modulus phase e^{`{iS/ℏ}`}, where S = ∫ L dt is the classical action. The probability amplitude is their coherent sum; the probability is its modulus squared.</p>
+      <GlassCard title="Deriving the Propagator" eq="K(b, a) = ⟨b | e^(−iĤ(t_b − t_a)/ℏ) | a⟩">
+        <p>Slice the time interval into N steps of size ε = (t<sub>b</sub> − t<sub>a</sub>)/N. Insert a complete set of position states between each factor:</p>
+        <p className="font-mono text-cyan/80 pl-3 border-l border-cyan/30">
+          K = ∫ dx₁ … dx<sub>N−1</sub>  ∏<sub>j=0</sub><sup>N−1</sup>  ⟨x<sub>j+1</sub> | e^(−iĤε/ℏ) | x<sub>j</sub>⟩.
+        </p>
+        <p>For H = p²/2m + V(x), evaluate each infinitesimal amplitude by also inserting momentum states and doing the Gaussian p-integral. The result is</p>
+        <p className="font-mono text-cyan/80 pl-3 border-l border-cyan/30">
+          ⟨x<sub>j+1</sub> | e^(−iĤε/ℏ) | x<sub>j</sub>⟩ ≈ (m/2πiℏε)^½ exp{`{ (iε/ℏ) [ ½m ((x_{j+1} − x_j)/ε)² − V(x_j) ] }`}.
+        </p>
+        <p>The bracket is exactly the discretised Lagrangian L = ½mẋ² − V. Taking N → ∞ turns the product of integrals into a functional integral, and the sum in the exponent into ∫L dt = S:</p>
+        <p className="font-mono text-cyan/80 pl-3 border-l border-cyan/30">
+          K(b, a) = ∫ 𝒟x(t)  exp( i S[x(t)] / ℏ ).
+        </p>
+        <p><strong>The Lagrangian formulation of classical mechanics is embedded in quantum mechanics at the deepest level: it is the exponent of the propagator.</strong></p>
       </GlassCard>
 
-      <GlassCard title="Why Classical Mechanics Emerges">
-        <p>For macroscopic motion, S ≫ ℏ. A tiny variation δx of the path produces an enormous phase change δS/ℏ, and neighbouring contributions cancel through destructive interference — except near a path where δS = 0. That stationary path is exactly the solution of the Euler–Lagrange equations. Newton's laws are the loud silence between cancellations.</p>
+      <GlassCard title="Why Newton's Laws Re-emerge" eq="δS[x_cl] = 0">
+        <p>Consider a nearby path x(t) = x<sub>cl</sub>(t) + η(t). Expand S to second order in η:</p>
+        <p className="font-mono text-cyan/80 pl-3 border-l border-cyan/30">
+          S[x] = S[x<sub>cl</sub>] + δS·η + ½ δ²S·η² + …
+        </p>
+        <p>At a classical solution the linear term vanishes (that is the Euler–Lagrange equation). For a macroscopic system S ≫ ℏ, so a small change in η causes an enormous change in phase e<sup>iS/ℏ</sup>. Contributions from neighbouring paths <em>oscillate rapidly and cancel</em> — except in a narrow tube around x<sub>cl</sub> where the phase is stationary.</p>
+        <p><strong>Classical mechanics is the semiclassical limit of a stationary-phase approximation.</strong> Nature "picks" one trajectory because destructive interference silences the alternatives.</p>
       </GlassCard>
 
-      <GlassCard title="Interference of Histories">
-        <p>In the double slit, the two slits provide two families of paths whose phases add. The bright fringes are where histories interfere constructively, the dark fringes where they annihilate. A "single" particle does not pass through one slit — every conceivable trajectory contributes, and reality is the interference pattern of the universe's own indecision.</p>
+      <GlassCard title="Field Path Integral and the Generating Functional" eq="Z[J] = ∫ 𝒟φ  exp( i ∫ (ℒ + Jφ) d⁴x )">
+        <p>Promote x(t) to a field φ(x). The integration measure 𝒟φ runs over every field configuration on spacetime. Introduce a source J(x) coupled to φ. Then all n-point correlation functions come from functional derivatives:</p>
+        <p className="font-mono text-cyan/80 pl-3 border-l border-cyan/30">
+          ⟨0 | T φ(x₁) … φ(xₙ) | 0⟩ = (−i)ⁿ (1/Z[0])  δⁿZ[J] / δJ(x₁)…δJ(xₙ) |<sub>J=0</sub>.
+        </p>
+        <p>Perturbatively expanding e<sup>iS<sub>int</sub></sup> inside the integral and evaluating each Gaussian moment reproduces the Feynman rules line by line. <strong>Feynman diagrams are the graphical expansion of a Gaussian functional integral perturbed by a polynomial interaction.</strong></p>
       </GlassCard>
 
-      <GlassCard title="From Particles to Fields" eq="Z = ∫ 𝒟φ  exp( i S[φ] / ℏ )">
-        <p>In QFT, the integration variable is not a particle path but an entire field configuration φ(x,t) over spacetime. The generating functional Z encodes every correlation function — and therefore every observable. Differentiate Z with respect to source terms and out fall propagators, scattering amplitudes, vacuum structure: the complete physical content of the theory.</p>
+      <GlassCard title="Wick Rotation and Statistical Mechanics" eq="t → −iτ  ⟹  e^(iS/ℏ)  →  e^(−S_E/ℏ)">
+        <p>Analytically continue time to imaginary values. The oscillating integrand becomes a real, positive Boltzmann weight, and the action becomes the Euclidean action S<sub>E</sub> = ∫[½(∂φ)² + V(φ)] d⁴x<sub>E</sub>. The partition function of a d-dimensional QFT is mathematically identical to that of a classical statistical field theory in d dimensions with temperature k<sub>B</sub>T ↔ ℏ.</p>
+        <p><strong>Quantum fluctuations in d dimensions and thermal fluctuations in d dimensions obey the same equations.</strong> This is why the renormalisation group, developed for phase transitions, applies verbatim to QFT.</p>
       </GlassCard>
 
-      <GlassCard title="Wick Rotation & the Bridge to Statistical Mechanics" eq="t → −iτ ⇒ e^{iS/ℏ} → e^{−SE/ℏ}">
-        <p>Continuing time into the imaginary axis turns the oscillating quantum integrand into a real Boltzmann weight. Quantum field theory in d dimensions becomes statistical mechanics in d+1. This is why critical phenomena, phase transitions, and quantum fields share the same mathematical skeleton — they are two faces of one geometry.</p>
-      </GlassCard>
-
-      <GlassCard title="Philosophical Coda">
-        <p>The path integral does not say a particle takes one path we cannot know. It says the question "which path?" has no answer because nature does not pick one. <em className="text-gold/90">Reality is the sum of every possibility, weighted by an angle no instrument can ever measure directly.</em></p>
+      <GlassCard title="Why This Formulation Matters">
+        <ul className="list-disc list-inside space-y-1 pl-2">
+          <li>Manifest Lorentz invariance: time and space appear symmetrically inside S = ∫ℒ d⁴x.</li>
+          <li>Gauge symmetry is enforced directly on the integration measure (Faddeev–Popov procedure).</li>
+          <li>Non-perturbative phenomena (instantons, solitons) are visible as saddle points that no order of perturbation theory can see.</li>
+          <li>Lattice discretisation of 𝒟φ turns QFT into a well-defined numerical problem (lattice QCD).</li>
+        </ul>
       </GlassCard>
     </SectionShell>
   );
